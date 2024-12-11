@@ -2,6 +2,12 @@ from customtkinter import *
 import requests
 from CTkMessagebox import CTkMessagebox
 from tkinter import *
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+FIREBASE_API_KEY = os.getenv("FIREBASE_API_KEY")
 
 def signin_handler(email,password_entry):
     # global email_value
@@ -14,7 +20,7 @@ def signin_handler(email,password_entry):
         "password": password_value,
         "returnSecureToken": True
     }
-    response = requests.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB71NwXNVhO5k3RDKrKfEPhcsGbaWEQxVg",json=input_data)
+    response = requests.post(f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={FIREBASE_API_KEY}",json=input_data)
 
     response_data = response.json()
 

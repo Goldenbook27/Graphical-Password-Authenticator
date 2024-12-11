@@ -8,6 +8,12 @@ import numpy as np
 from mainContent import maincontent
 from PIL import Image, ImageTk
 import emailhandler
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+FIREBASE_API_KEY = os.getenv("FIREBASE_API_KEY")
 number_counter = 0
 i=0
 a = []
@@ -35,7 +41,7 @@ def login_handler(email,password_entry):
             "password": password_value,
             "returnSecureToken": True
         }
-        response = requests.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB71NwXNVhO5k3RDKrKfEPhcsGbaWEQxVg",json=input_data)
+        response = requests.post(f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}",json=input_data)
 
         response_data = response.json()
 
